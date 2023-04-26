@@ -1,0 +1,48 @@
+@startuml
+
+    title Use Cases for users\nwith role BASIC
+
+    left to right direction
+
+    actor "Guest" as g
+
+    package User {
+        actor "Student" as stud
+        actor "Staff" as staff
+    }
+
+    package "Open E-MOBILITY" {
+        rectangle "Charging Station" {
+            usecase "Start a transaction" as UC6
+            usecase "Stop a running transaction" as UC7
+        }
+        rectangle "Mobile Client" {
+            usecase "Book a reservation" as UC1
+            usecase "Cancel a reservation" as UC2
+            usecase "Postpone a reservation" as UC3
+            usecase "Start a transaction" as UC4
+            usecase "Stop a running transaction" as UC5
+        }
+    }
+
+    stud --> UC1 #Red
+    stud --> UC2 #Red
+    stud --> UC3 #Red
+    stud --> UC4 #Red
+    stud --> UC5 #Red
+    stud --> UC6 #Red
+    stud --> UC7 #Red
+
+    staff --> UC1
+    staff --> UC2
+    staff --> UC3
+    staff --> UC4
+    staff --> UC5
+    staff --> UC6
+    staff --> UC7
+
+    g --> UC6
+    g --> UC7
+    
+
+@enduml

@@ -1,0 +1,38 @@
+@startuml
+
+title Reservation by the user
+
+start
+
+floating note left
+    This process describes the activities
+    needed for a reservation of an charging connector
+    by the user himself.
+end note
+
+if (Use advanced\nsearch?) then (yes)
+    :Activate advanced\nfilter search;
+else (no)
+    :Switch to\nreservation form;
+endif
+
+repeat :Specify time, date and\nlocation for the reservation;
+
+repeat while (CS available?) is (no)
+-> yes;
+:Select CS;
+
+while (Connector\navailable?) is (no)
+    :Check for another \nfree connector;
+endwhile (yes)
+:Select connector;
+
+:Submit reservation\nrequest;
+
+while (Reservation successful?) is (no)
+    :Resubmit request;
+endwhile (yes)
+
+stop
+
+@enduml

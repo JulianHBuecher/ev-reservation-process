@@ -1,0 +1,34 @@
+@startuml
+
+title Cancellation of a reservation \non behalf of an user (ADMIN)
+
+start
+
+floating note left
+    This scenario describes the cancellation of an
+    existing reservation by an administrative user on
+    behalf of the user, which created the reservation.
+    ====
+    Such a situation could occur if the user is not able
+    to cancel the reservation himself or he needs to
+    switch or postpone it.
+end note
+
+:Search reservation;
+
+if (Reservation exists?) then (yes)
+    :Select reservation;
+    :Mark reservation for\ncancellation;
+    :Submit cancellation\nrequest;
+    if (User has\nadmin privileges?) then (yes)
+        :Request permitted;
+    else (no)
+        :Request prohibited;
+    endif
+else (no)
+
+endif
+
+stop
+
+@enduml

@@ -1,0 +1,58 @@
+@startuml Reservation
+
+
+title Reservation for PV supported EV charging stations
+header An OCPP-Based Approach for Electric Vehicle Charging Management
+footer Page %page% of %lastpage%
+
+' define
+!define PAGE_SETTINGS newpage
+
+actor "[[http://plantuml.com/sequence EV-Driver]]" as User
+participant "[[http://plantuml.com/sequence Open e-Mobility]]" as System
+
+User -> System: Configuration Request
+System --> User: Configuration Response
+note left
+    **Preferences**
+endnote
+
+User -> System: Reservation Request
+User <-- System: Reservation Response
+note left
+    **Reservation**
+endnote
+
+newpage
+
+participant System 
+participant CS
+
+System -> CS: Change Configuration Request
+System <-- CS: Change Configuration Response
+note left
+    Charging power
+endnote
+
+System -> CS: Reserve Now Request
+System <-- CS: Reserve Now Response
+note left
+    Reservation
+endnote
+
+System -> CS: Remote Start Transaction Request
+System <-- CS: Remote Start Transaction Response
+note left
+    Start Charging
+endnote
+
+System -> CS: Remote Stop Transaction Request
+System <-- CS: Remote Stop Transaction Response
+note left
+    Stop Charging
+endnote
+
+
+
+
+@enduml

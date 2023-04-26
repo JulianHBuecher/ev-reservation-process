@@ -1,0 +1,24 @@
+@startuml
+
+title TwinEV Reservation
+header SGAM-Based Analysis for the Capacity Optimization of Smart Grids Utilizing e-Mobility: The Use Case of Booking a Charge Session
+footer Page %page% of %lastpage%
+
+actor "EV-Driver" as user
+participant "Mobile App" as mobile
+participant "Open e-Mobility backend" as backend
+participant "Charging Station Management System" as csms
+participant "Charge Station" as cs
+
+user -> mobile: Select available Charging Station (CS)
+mobile -> backend: Send reservation request (with Charging Station ID, Connector ID and User ID)
+backend -> csms: Forward reservation request (with User ID, Charging Station ID, Connector ID and End Time)
+csms -> cs: Reserve Charging Station (with Connector ID) for User (with ID) and End Time
+cs -> csms: Confirm reservation
+csms -> backend: Return successful reservation (with Reservation ID)
+
+backend -> mobile: Acknowledgment of successful reservation
+user -> cs: Drive th CS, authenticate with User ID (RFID) and start charging
+cs --> user: Authenticate the corresponding Electric Vehicle User (with RFID) and unlock CS for charging
+
+@enduml

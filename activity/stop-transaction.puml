@@ -1,0 +1,30 @@
+@startuml
+
+title Stop a running transaction
+
+start
+
+floating note left
+    This process describes the steps to
+    stop an running charging transaction.
+    This scenario assumes the user, which is
+    charging his vehicle wants to stop the
+    charging process.
+end note
+
+:Select transaction;
+
+if (Transaction is finished?) then (yes)
+    stop
+else (no)
+    :Select running\ntransaction;
+    :Stop the transaction;
+endif
+
+while (Transaction stopped?) is (no)
+    :Submit another stop request;
+end while (yes)
+
+stop
+
+@enduml

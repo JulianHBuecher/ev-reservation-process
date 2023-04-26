@@ -1,0 +1,13 @@
+@startuml
+
+title Stop a charging transaction on\nbehalf of another user
+
+start
+
+floating note left
+
+end note
+
+stop
+
+@enduml

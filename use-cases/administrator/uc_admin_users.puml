@@ -1,0 +1,33 @@
+@startuml
+
+    title Use Cases for users\nwith role ADMIN
+
+    left to right direction
+
+    actor "Guest" as g
+
+    package Administrator {
+        actor "Secretary" as sec
+        actor "Janitor" as j 
+    }
+
+    package "Open E-Mobility" {
+        rectangle "Admin Dashboard" <<extends Mobile Client>> {
+            usecase "Book a reservation\nfor a user" as UC6
+            usecase "Cancel a reservation\nfor a user" as UC7
+            usecase "Activate a charging station\nfor reservations" as UC8
+            usecase "Deactivate a charging station\nfor reservations" as UC9
+        }
+    }
+
+    sec --> UC6 #Blue 
+    sec --> UC7 #Blue
+    sec --> UC8 #Blue
+    sec --> UC9 #Blue
+
+    j --> UC6
+    j --> UC7
+    j --> UC8
+    j --> UC9
+    
+@enduml

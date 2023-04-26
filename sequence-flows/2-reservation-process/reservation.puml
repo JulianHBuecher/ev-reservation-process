@@ -1,0 +1,38 @@
+@startuml
+
+title TwinEV Reservation
+header SGAM-Based Analysis for the Capacity Optimization of Smart Grids Utilizing e-Mobility: The Use Case of Booking a Charge Session
+footer Page %page% of %lastpage%
+
+actor "EV-Driver" as user
+participant "Mobile App" as mobile
+participant "Open e-Mobility backend" as backend
+participant "MongoDB" as db
+participant "Charge Station" as cs
+participant "Electric Vehicle" as ev
+
+user -> mobile: Reserve Charging Point (with Charge Point Adress)
+mobile -> backend: Reserve Charge Point (with Charge Point Adress, Vehicle ID and User ID)
+backend -> db: Persist Reservation ID with the preceding parameters
+backend -> cs: lock the Charge Point
+backend --> mobile: Return Time Limit and Reservation ID
+mobile --> user: Reservation completed
+
+user -> ev: Connect Vehicle to Charge Point
+user -> mobile: Start Session with Mode, Desired Time, Desired Charge, Current Charge Level
+mobile -> db: Get Reservation Data by Reservation ID
+db --> backend: Return Reservation Data
+backend -> backend: Get Data out of DB response
+backend -> backend: Calculate Charge Curve with extracted data
+backend -> cs: Start the Charging Process with calculated curve
+cs -> ev: Charge the Vehicle
+backend -> db: Store the Reservation as a Charge (with Reservation Data and the curve data)
+backend --> mobile: Return curve data
+mobile --> user: Show the estimated status and loading time
+backend -> backend: End the session
+backend -> cs: End the Session for the charging station
+cs -> ev: Stop Charging
+backend -> mobile: Notify the user that the session is finished
+mobile -> user: Show a notification that the session has finished
+
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+
+title Reservation on behalf of an user (ADMIN)
+
+start
+
+floating note left
+    TODO
+    This process describes the activities
+    needed for a reservation of an charging connector
+    by the administrator on behalf of another user
+    of the organisation.
+end note
+
+repeat :Specify date, time and\nlocation for reservation;
+
+repeat while (CS available?) is (no)
+-> yes;
+
+:Select available CS;
+
+while (Connector available?) is (no)
+    :Check for\nanother connector;
+endwhile (yes)
+
+:Select connector;
+
+:Submit reservation\nrequest;
+
+while (Reservation successful?) is (no)
+    :Resubmit request;
+endwhile (yes)
+
+stop
+
+@enduml

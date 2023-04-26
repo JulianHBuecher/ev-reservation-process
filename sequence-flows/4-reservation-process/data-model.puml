@@ -1,0 +1,56 @@
+@startuml
+
+class Charging_Station {
+    Charging_Station_Id
+    Manufacturer_Id
+    Country_Id
+    Region_Id
+    Provinde_Id
+    City_Id
+    District_Id
+    IP_Address
+    Accessibility
+    IP_Address
+    Latitude
+    Longitude
+    Info
+    N_of_Connectors
+}
+
+class Connectors {
+    Charging_Station_Id
+    Connector_ID
+    Connector_Error_Code
+    Connector_Status
+    Reserveable
+    Availability
+    Max_Amplitude
+    Phase
+    Voltage
+    Charging_Protocol
+    Connector_Type
+    Charging_Capability
+}
+
+class Reservations {
+    Charging_Station_Id
+    Provinde_Id
+    User
+    Connector_Id
+    Priority
+    Reservation_Time
+    End_Time
+    Slots
+    Power
+    Price
+    Time
+}
+
+class User {
+    Android_Id
+    Username
+    Password
+    Email
+}
+
+@enduml

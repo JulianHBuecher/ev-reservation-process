@@ -1,0 +1,36 @@
+@startuml
+
+title Cancel a reservation
+
+start
+
+floating note left
+    This diagram describes
+    describes the process of 
+    cancelling a reservation 
+    by the user himself
+end note
+
+:List reservations;
+
+if (Reservation exist?) then (yes)
+    :Select reservation;
+    :Mark for cancellation;
+
+else (no)
+    stop
+endif
+
+:Submit cancellation\nrequest;
+
+if (User has\nrequired privileges?) then (yes)
+    :Request permitted;
+else (no)
+    :Request prohibited;
+endif
+
+stop
+
+
+
+@enduml

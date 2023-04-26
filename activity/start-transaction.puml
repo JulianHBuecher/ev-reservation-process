@@ -1,0 +1,26 @@
+@startuml
+
+title Start reserved transaction on charging station
+
+start
+
+floating note left
+    Assuming the electric vehicle user arrives
+    on time for his reservation at the specified
+    charging station
+end note
+
+:Select reservation;
+
+:Select associated connector;
+
+if (Connector is ready?) then (yes)
+    :Start the charging process;
+else (no)
+    :Check for free connector;
+    stop
+endif
+
+end
+
+@enduml

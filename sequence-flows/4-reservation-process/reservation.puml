@@ -1,0 +1,31 @@
+@startuml
+
+title OCPP 1.5 Reservation
+header Electric vehicles charging reservation based on OCPP
+footer Page %page% of %lastpage%
+
+participant "Mobile App" as mobile
+participant "Open e-Mobility backend" as backend
+participant "MongoDB" as db
+participant "Charging Station Management System" as csms
+participant "Charge Station" as cs
+
+mobile -> csms: Login Request
+backend -> db: Get User
+db --> backend: User Data and Password
+backend -> db: Get Charging Station Data
+db --> backend: Return Charging Station Data
+mobile --> backend: Create a Reservation
+backend -> db: Get free slots
+db --> backend: Return free slots
+
+backend -> mobile: Send best solutions for the charging reservations slots
+mobile -> backend: Confirm the best fitting provided solution
+
+backend -> db: Insert a reservation
+db --> backend: Response with succesful reservation
+
+backend -> cs: Reserve the Charging Station now
+backend -> mobile: Reservation successful done
+
+@enduml

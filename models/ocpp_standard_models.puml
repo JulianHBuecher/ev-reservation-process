@@ -1,0 +1,69 @@
+@startuml
+
+class IdToken {
+    IdToken: String[20]
+}
+
+class ReserveNowRequest {
+    connectorId: string
+    expiryDate: Date
+    idTag: IdToken
+    parentIdTag: IdToken (optional)
+    reservationId: string
+}
+
+class ReserveNowConfig {
+    status: ReservationStatus
+}
+
+enum ReservationStatus {
+    ACCEPTED
+    FAULTED
+    OCCUPIED
+    REJECTED
+    UNAVAILABLE
+}
+
+class CancelReservationRequest {
+    reservationId: string
+}
+
+class CancelReservationConfig {
+    status: CancelReservationStatus
+}
+
+enum CancelReservationStatus {
+    ACCEPTED
+    REJECTED
+}
+
+class ChangeAvailabilityRequest {
+    connectorId: string
+    type: AvailabilityType
+}
+
+class ChangeAvailabilityConfig {
+    status: AvailabilityStatus
+}
+
+enum AvailabilityType {
+    INOPERATIVE
+    OPERATIVE
+}
+
+enum AvailabilityStatus {
+    ACCEPTED
+    REJECTED
+    SCHEDULED
+}
+
+class Reservation {
+    reservationId: string
+    chargingStationId: string
+    user: User
+    connectorId: string
+    reservationTime: Date
+    expiryDate: Date
+}
+
+@enduml

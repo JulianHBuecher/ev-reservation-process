@@ -1,0 +1,58 @@
+@startuml
+
+title Deployment View on\nOpen E-Mobility Services
+
+left to right direction
+
+package "Administrator" {
+    actor "Secretary" as sec
+    actor "Janitor" as j
+}
+
+package "User" {
+    actor "Student" as s
+    actor "Staff" as sta
+}
+
+
+node "Mobile\nClient" as client {
+
+}
+
+rectangle "Hosting Platform" as host #LightGray {
+    node "Admin\nDashboard" as frontend {
+
+    }
+
+    node "Backend\nSystem" as backend #White {
+        node "OCPP Server" as ocpp
+        node "OICP Server" as oicp
+        node "OCPI Server" as ocpi
+        node "REST Server" as rest
+        node "OData Server" as odata
+    }
+
+    database mongo [
+        MongoDB
+    ]
+}
+
+s --> client
+sta --> client
+
+sec --> client
+sec --> frontend
+
+j -r-> client
+j -r-> frontend
+
+ocpp --> mongo
+oicp --> mongo
+ocpi --> mongo
+rest --> mongo
+odata --> mongo
+
+frontend -r-> rest
+client -d-> rest
+
+@enduml

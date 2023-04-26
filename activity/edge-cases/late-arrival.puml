@@ -1,0 +1,29 @@
+@startuml
+
+start
+
+floating note left
+    TODO
+    Assuming the electric vehicle user
+    arrives late for his reservation. After
+    connecting the CS with the EV he wants
+    to start the transaction.
+end note
+
+:Select reservation;
+
+if (Expiry time reached?) then (yes)
+    :Check for free CS;
+else (no)
+    :Select according\nconnector;
+endif
+
+while (Connector is ready?) is (no)
+    :Check for free connector;
+endwhile (yes)
+
+:Start transaction;
+
+stop
+
+@enduml
